@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Health Assistant - AarogyaX Cure</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .chat-box {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      height: 520px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+    .chat-messages {
+      flex-grow: 1;
+      padding: 1.5rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .msg-bubble {
+      max-width: 80%;
+      padding: 0.85rem 1.15rem;
+      border-radius: var(--radius-md);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+    .msg-user {
+      align-self: flex-end;
+      background: var(--primary-dark);
+      color: #ffffff;
+      border-bottom-right-radius: 2px;
+    }
+    .msg-ai {
+      align-self: flex-start;
+      background: #fafafa;
+      color: var(--primary-dark);
+      border-bottom-left-radius: 2px;
+      border: 1px solid var(--border-subtle);
+    }
+    .suggestion-pill {
+      background: #ffffff;
+      color: var(--text-muted);
+      padding: 0.35rem 0.85rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.825rem;
+      cursor: pointer;
+      border: 1px solid var(--border-subtle);
+      transition: all var(--transition-smooth);
+    }
+    .suggestion-pill:hover {
+      background: var(--primary-dark);
+      color: #ffffff;
+      border-color: var(--primary-dark);
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="dashboard.html" class="brand-logo">
+      🏥 AarogyaX <span class="brand-accent">Cure</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="assistant.html" class="active">AI Assistant</a></li>
+      <li><a href="hospitals.html">Hospitals</a></li>
+      <li><a href="blood.html">Blood Donors</a></li>
+      <li><a href="records.html">Records</a></li>
+      <li><a href="reminders.html">Reminders</a></li>
+      <li><a href="profile.html">Health Card</a></li>
+      <li><a href="#" id="logoutBtn" class="btn btn-outline" style="padding: 0.35rem 0.8rem; font-size: 0.85rem;">Logout</a></li>
+      <li><a href="emergency.html" class="btn btn-sos" style="padding: 0.35rem 0.8rem; font-size: 0.85rem;">🚨 SOS</a></li>
+    </ul>
+  </nav>
+
+  <main class="dashboard-container">
+    <div class="dashboard-header">
+      <div>
+        <h1>🤖 AI Health Assistant</h1>
+        <p>Educational health guidance powered by Gemini 3.7 Flash</p>
+      </div>
+      <span class="status-badge live">
+        <span class="pulse-dot"></span> Medical Safety Guard Active
+      </span>
+    </div>
+
+    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem;">
+      <span class="suggestion-pill" data-query="I have a mild headache and fever. What steps can I take?">Headache & Fever</span>
+      <span class="suggestion-pill" data-query="What is the recommended first-aid for an ankle sprain?">Ankle Sprain First-Aid</span>
+      <span class="suggestion-pill" data-query="What foods help boost my immune system?">Immune Support Foods</span>
+    </div>
+
+    <div class="chat-box">
+      <div id="chatMessages" class="chat-messages">
+        <div class="msg-bubble msg-ai">
+          👋 Hello! I am your <strong>AarogyaX AI Health Assistant</strong>.<br><br>
+          Feel free to ask health questions or first-aid guidance. 
+          <em style="display: block; font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">
+            Note: Guidance is for educational purposes only and does not replace certified medical diagnosis.
+          </em>
+        </div>
+      </div>
+
+      <form id="chatForm" style="display: flex; gap: 0.75rem; padding: 0.85rem; background: #fafafa; border-top: 1px solid var(--border-subtle);">
+        <input type="text" id="userInput" placeholder="Ask about symptoms or first-aid steps..." required style="flex-grow: 1; padding: 0.7rem 0.9rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); font-size: 0.9rem;">
+        <button type="submit" class="btn btn-primary" style="padding: 0.7rem 1.4rem;">Ask AI</button>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 AarogyaX Cure. Educational Guidance Only.</p>
+  </footer>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/assistant.js"></script>
+</body>
+</html>

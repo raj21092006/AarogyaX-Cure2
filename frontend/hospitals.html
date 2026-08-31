@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hospitals Near Me - AarogyaX Cure</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <style>
+    #mapContainer {
+      height: 420px;
+      width: 100%;
+      border-radius: var(--radius-lg);
+      margin-bottom: 1.5rem;
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-sm);
+      z-index: 1;
+    }
+    .distance-pill {
+      background: #ffffff;
+      color: var(--text-muted);
+      border: 1px solid var(--border-subtle);
+      padding: 0.4rem 1rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--transition-smooth);
+    }
+    .distance-pill:hover, .distance-pill.active-pill {
+      background: var(--primary-dark);
+      color: #ffffff;
+      border-color: var(--primary-dark);
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="dashboard.html" class="brand-logo">
+      🏥 AarogyaX <span class="brand-accent">Cure</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="hospitals.html" class="active">Hospitals Near Me</a></li>
+      <li><a href="blood.html">Blood Donors</a></li>
+      <li><a href="emergency.html" class="btn btn-sos">🚨 SOS</a></li>
+    </ul>
+  </nav>
+
+  <main class="dashboard-container">
+    <div class="dashboard-header">
+      <div>
+        <h1>🏥 Hospitals Near Me</h1>
+        <p id="locationStatusText">Real-time nearby hospital discovery powered by Geoapify & GPS</p>
+      </div>
+      <button id="useLocationBtn" class="btn btn-primary">
+        📍 Detect My Location
+      </button>
+    </div>
+
+    <div id="mapContainer"></div>
+
+    <div style="display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center; margin-bottom: 1.75rem;">
+      <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted); margin-right: 0.4rem;">Distance Filter:</span>
+      <button class="distance-pill active-pill" data-distance="50">All Nearby</button>
+      <button class="distance-pill" data-distance="3">Within 3 km</button>
+      <button class="distance-pill" data-distance="5">Within 5 km</button>
+      <button class="distance-pill" data-distance="10">Within 10 km</button>
+    </div>
+
+    <div id="hospitalGrid" class="grid-container">
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 AarogyaX Cure. Hospitals Near Me Network.</p>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/hospitals.js"></script>
+</body>
+</html>

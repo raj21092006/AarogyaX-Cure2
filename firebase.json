@@ -1,0 +1,19 @@
+{
+  "auth": {
+    "providers": {
+      "emailPassword": true,
+      "googleSignIn": {
+        "oAuthBrandDisplayName": "AarogyaX Cure",
+        "supportEmail": "support@data-d3a3e.firebaseapp.com",
+        "authorizedRedirectUris": [
+          "http://localhost",
+          "http://localhost:5000",
+          "http://127.0.0.1:5000"
+        ]
+      }
+    }
+  },
+  "firestore": {
+    "rules": "firestore.rules"
+  }
+}

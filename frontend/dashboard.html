@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - AarogyaX Cure</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <script src="js/theme.js"></script>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="dashboard.html" class="brand-logo">
+      <img src="favicon.png" alt="AarogyaX Logo" style="height: 28px; width: 28px; vertical-align: middle; margin-right: 4px;"> AarogyaX <span class="brand-accent">Cure</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="dashboard.html" class="active">Dashboard</a></li>
+      <li><a href="assistant.html">AI Assistant</a></li>
+      <li><a href="hospitals.html">Hospitals</a></li>
+      <li><a href="labs.html">Diagnostic Labs</a></li>
+      <li><a href="blood.html">Blood Donors</a></li>
+      <li><a href="records.html">Records</a></li>
+      <li><a href="profile.html">Health Card</a></li>
+      <li><button class="theme-toggle-btn">🌙 Dark Mode</button></li>
+      <li><a href="#" id="logoutBtn" class="btn btn-outline" style="padding: 0.35rem 0.8rem; font-size: 0.85rem;">Logout</a></li>
+      <li><a href="emergency.html" class="btn btn-sos" style="padding: 0.35rem 0.8rem; font-size: 0.85rem;">🚨 SOS</a></li>
+    </ul>
+  </nav>
+
+  <main class="dashboard-container">
+    <div class="dashboard-header">
+      <div class="user-welcome">
+        <h1 id="userGreeting">Hello, User 👋</h1>
+        <p>How can we assist your healthcare needs today?</p>
+      </div>
+      <div style="display: flex; gap: 0.75rem; align-items: center;">
+        <span id="systemStatusBadge" class="status-badge demo">
+          <span class="pulse-dot"></span> <span id="statusModeText">AarogyaX Network</span>
+        </span>
+      </div>
+    </div>
+
+    <div class="health-bar">
+      <div class="health-stat-item">
+        <div class="stat-icon">🩸</div>
+        <div class="stat-info">
+          <label>Blood Group</label>
+          <value id="dashBloodGroup">B+</value>
+        </div>
+      </div>
+      <div class="health-stat-item">
+        <div class="stat-icon">📞</div>
+        <div class="stat-info">
+          <label>Emergency Contact</label>
+          <value id="dashEmergencyContact">Mom (+91 91234 56789)</value>
+        </div>
+      </div>
+      <div class="health-stat-item">
+        <div class="stat-icon">💊</div>
+        <div class="stat-info">
+          <label>Next Dosage</label>
+          <value id="dashNextMed">Paracetamol (8:00 PM)</value>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live "Hospitals Near Me" Quick Banner -->
+    <div style="background: var(--card-bg); padding: 1.25rem 1.5rem; border-radius: var(--radius-lg); border: 1px solid var(--border-subtle); margin-bottom: 2rem; box-shadow: var(--shadow-sm);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+        <h3 style="font-size: 1.1rem; color: var(--primary-dark); font-weight: 600;">🏥 Hospitals Near Me</h3>
+        <a href="hospitals.html" class="card-action" style="font-size: 0.85rem;">View Full Interactive Map &rarr;</a>
+      </div>
+      <div id="dashNearbyHospitalsList" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+        <div style="font-size: 0.85rem; color: var(--text-muted);">Detecting nearest emergency hospitals...</div>
+      </div>
+    </div>
+
+    <div class="grid-container">
+      <div class="feature-card sos-card">
+        <div class="card-icon">🚨</div>
+        <h3 class="card-title">Emergency SOS Dispatch</h3>
+        <p class="card-desc">Broadcast your exact GPS location, alert emergency contacts, and locate nearby emergency rooms.</p>
+        <a href="emergency.html" class="btn btn-sos">Trigger SOS Emergency</a>
+      </div>
+
+      <div class="feature-card">
+        <div class="card-icon">🤖</div>
+        <h3 class="card-title">AI Health Assistant</h3>
+        <p class="card-desc">Ask symptom questions. Gemini 3.7 Flash provides structured first-aid guidance.</p>
+        <a href="assistant.html" class="btn btn-primary">Open AI Assistant</a>
+      </div>
+
+      <div class="feature-card">
+        <div class="card-icon">🏥</div>
+        <h3 class="card-title">Hospitals Near Me</h3>
+        <p class="card-desc">Geoapify interactive map showing hospital distance, bed availability, and 1-click directions.</p>
+        <a href="hospitals.html" class="btn btn-outline">Find Hospitals</a>
+      </div>
+
+      <div class="feature-card">
+        <div class="card-icon">🧪</div>
+        <h3 class="card-title">Diagnostic Labs Near Me</h3>
+        <p class="card-desc">Locate nearby pathology testing centers, CBC blood test labs, and home sample collection.</p>
+        <a href="labs.html" class="btn btn-outline">Find Diagnostic Labs</a>
+      </div>
+
+      <div class="feature-card">
+        <div class="card-icon">🩸</div>
+        <h3 class="card-title">Blood Donor Match</h3>
+        <p class="card-desc">Connect with verified local donors or post an urgent blood requirement request.</p>
+        <a href="blood.html" class="btn btn-outline">Blood Network</a>
+      </div>
+
+      <div class="feature-card">
+        <div class="card-icon">💳</div>
+        <h3 class="card-title">Digital Health Card</h3>
+        <p class="card-desc">View your scannable QR Code ID with emergency allergies and contact details.</p>
+        <a href="profile.html" class="btn btn-outline">View Health Card</a>
+      </div>
+
+      <div class="feature-card">
+        <div class="card-icon">📋</div>
+        <h3 class="card-title">Records & Reminders</h3>
+        <p class="card-desc">Access digital prescriptions, blood tests, and automated dosage reminders.</p>
+        <a href="records.html" class="btn btn-outline">View Health Records</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 AarogyaX Cure. Healthcare Platform.</p>
+  </footer>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

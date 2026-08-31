@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Real-Time Blood Network - AarogyaX Cure</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <script src="js/theme.js"></script>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="dashboard.html" class="brand-logo">
+      🏥 AarogyaX <span class="brand-accent">Cure</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="assistant.html">AI Assistant</a></li>
+      <li><a href="hospitals.html">Hospitals</a></li>
+      <li><a href="blood.html" class="active">Blood Donors</a></li>
+      <li><a href="records.html">Records</a></li>
+      <li><a href="reminders.html">Reminders</a></li>
+      <li><a href="profile.html">Health Card</a></li>
+      <li><button class="theme-toggle-btn">🌙 Dark Mode</button></li>
+      <li><a href="#" id="logoutBtn" class="btn btn-outline" style="padding: 0.35rem 0.8rem; font-size: 0.85rem;">Logout</a></li>
+      <li><a href="emergency.html" class="btn btn-sos" style="padding: 0.35rem 0.8rem; font-size: 0.85rem;">🚨 SOS</a></li>
+    </ul>
+  </nav>
+
+  <main class="dashboard-container">
+    <div class="dashboard-header">
+      <div>
+        <h1>🩸 Real-Time Blood Donor Network</h1>
+        <p id="liveDonorStatusText">Live donor contact numbers, distance calculation, and availability status</p>
+      </div>
+      <div style="display: flex; gap: 0.5rem; align-items: center;">
+        <span class="status-badge live">
+          <span class="pulse-dot"></span> Realtime Stream Active
+        </span>
+      </div>
+    </div>
+
+    <div style="display: flex; gap: 0.75rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+      <button id="tabFindDonors" class="btn btn-primary" style="flex: 1; min-width: 180px;">
+        🔍 Find Live Donors Near Me
+      </button>
+      <button id="tabBecomeDonor" class="btn btn-outline" style="flex: 1; min-width: 180px; border-color: var(--brand-emerald); color: var(--brand-emerald);">
+        🙋 Register as a Blood Donor
+      </button>
+      <button id="tabRequestBlood" class="btn btn-sos" style="flex: 1; min-width: 180px;">
+        🚨 Request Emergency Blood
+      </button>
+    </div>
+
+    <div id="filterBox" style="background: var(--card-bg); padding: 1.25rem; border-radius: var(--radius-lg); border: 1px solid var(--border-subtle); margin-bottom: 2rem; box-shadow: var(--shadow-sm);">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) auto; gap: 0.85rem; align-items: end;">
+        <div>
+          <label style="display: block; font-size: 0.825rem; font-weight: 500; color: var(--primary-dark); margin-bottom: 0.3rem;">Blood Group</label>
+          <select id="filterBloodGroup" style="width: 100%; padding: 0.65rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); background: var(--bg-app); font-size: 0.875rem;">
+            <option value="">All Blood Groups</option>
+            <option value="B+">B Positive (B+)</option>
+            <option value="O+">O Positive (O+)</option>
+            <option value="A+">A Positive (A+)</option>
+            <option value="AB+">AB Positive (AB+)</option>
+            <option value="O-">O Negative (O-)</option>
+            <option value="B-">B Negative (B-)</option>
+            <option value="A-">A Negative (A-)</option>
+            <option value="AB-">AB Negative (AB-)</option>
+          </select>
+        </div>
+        <div>
+          <label style="display: block; font-size: 0.825rem; font-weight: 500; color: var(--primary-dark); margin-bottom: 0.3rem;">City / Location</label>
+          <input type="text" id="filterCity" placeholder="e.g. Durgapur" style="width: 100%; padding: 0.65rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); font-size: 0.875rem;">
+        </div>
+        <button id="searchDonorsBtn" class="btn btn-primary" style="padding: 0.65rem 1.4rem;">Find Donors</button>
+      </div>
+    </div>
+
+    <div id="becomeDonorCard" style="display: none; background: var(--card-bg); padding: 1.75rem; border-radius: var(--radius-lg); border: 1px solid var(--brand-emerald); margin-bottom: 2rem; box-shadow: var(--shadow-sm);">
+      <h3 style="color: var(--brand-emerald); margin-bottom: 1rem;">🙋 Register as an Active Blood Donor</h3>
+      <form id="becomeDonorForm">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; margin-bottom: 0.85rem;">
+          <div>
+            <label style="display: block; font-size: 0.825rem; font-weight: 500; margin-bottom: 0.3rem;">Donor Name</label>
+            <input type="text" id="donorNameInput" required placeholder="Full Name" style="width: 100%; padding: 0.65rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.825rem; font-weight: 500; margin-bottom: 0.3rem;">Contact Phone Number</label>
+            <input type="tel" id="donorPhoneInput" required placeholder="+91 9876543210" style="width: 100%; padding: 0.65rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; margin-bottom: 1.25rem;">
+          <div>
+            <label style="display: block; font-size: 0.825rem; font-weight: 500; margin-bottom: 0.3rem;">Blood Group</label>
+            <select id="donorBloodGroupInput" style="width: 100%; padding: 0.65rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+              <option value="B+">B+</option>
+              <option value="O+">O+</option>
+              <option value="A+">A+</option>
+              <option value="AB+">AB+</option>
+              <option value="O-">O-</option>
+              <option value="B-">B-</option>
+              <option value="A-">A-</option>
+              <option value="AB-">AB-</option>
+            </select>
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.825rem; font-weight: 500; margin-bottom: 0.3rem;">City / Region</label>
+            <input type="text" id="donorCityInput" required placeholder="e.g. Durgapur" style="width: 100%; padding: 0.65rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.75rem; background: var(--brand-emerald); border-color: var(--brand-emerald);">
+          Save Live Donor Profile to Network
+        </button>
+      </form>
+    </div>
+
+    <div id="requestFormCard" style="display: none; background: var(--card-bg); padding: 1.75rem; border-radius: var(--radius-lg); border: 1px solid var(--sos-red); margin-bottom: 2rem; box-shadow: var(--shadow-sm);">
+      <h3 style="color: var(--sos-red); margin-bottom: 1rem;">🚨 Broadcast Emergency Blood Requirement</h3>
+      <form id="bloodRequestForm">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; margin-bottom: 0.85rem;">
+          <div>
+            <label style="display: block; font-size: 0.825rem; font-weight: 500; margin-bottom: 0.3rem;">Patient Name</label>
+            <input type="text" id="reqPatientName" required placeholder="Full Name" style="width: 100%; padding: 0.65rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.825rem; font-weight: 500; margin-bottom: 0.3rem;">Required Blood Group</label>
+            <select id="reqBloodGroup" style="width: 100%; padding: 0.65rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+              <option value="B+">B+</option>
+              <option value="O+">O+</option>
+              <option value="A+">A+</option>
+              <option value="AB+">AB+</option>
+              <option value="O-">O-</option>
+              <option value="B-">B-</option>
+              <option value="A-">A-</option>
+              <option value="AB-">AB-</option>
+            </select>
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; margin-bottom: 1.25rem;">
+          <div>
+            <label style="display: block; font-size: 0.825rem; font-weight: 500; margin-bottom: 0.3rem;">Hospital Name</label>
+            <input type="text" id="reqHospital" required placeholder="e.g. Apex Hospital" style="width: 100%; padding: 0.65rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.825rem; font-weight: 500; margin-bottom: 0.3rem;">Contact Phone</label>
+            <input type="tel" id="reqContact" required placeholder="+91 XXXXX XXXXX" style="width: 100%; padding: 0.65rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+          </div>
+        </div>
+        <button type="submit" class="btn btn-sos" style="width: 100%; padding: 0.75rem;">Broadcast Blood Request</button>
+      </form>
+    </div>
+
+    <div id="donorGrid" class="grid-container">
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 AarogyaX Cure. Real-Time Blood Donor Network.</p>
+  </footer>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/blood.js"></script>
+</body>
+</html>

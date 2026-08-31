@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register Profile - AarogyaX Cure (Patient / Doctor / Hospital)</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <script src="js/theme.js"></script>
+  <style>
+    .auth-card {
+      width: 100%;
+      max-width: 540px;
+      padding: 2.25rem;
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-card);
+      border: 1px solid var(--border-subtle);
+      margin: 2rem 1rem;
+    }
+    .role-tab-btn {
+      flex: 1;
+      padding: 0.65rem 0.4rem;
+      font-size: 0.825rem;
+      font-weight: 500;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-app);
+      color: var(--text-muted);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all var(--transition-smooth);
+      text-align: center;
+    }
+    .role-tab-btn.active-role {
+      background: var(--primary-dark);
+      color: var(--bg-app);
+      border-color: var(--primary-dark);
+      font-weight: 600;
+    }
+    .input-group {
+      position: relative;
+    }
+    .toggle-pwd {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      font-size: 1rem;
+      user-select: none;
+      opacity: 0.5;
+    }
+    .contact-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 0.5rem;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+    .security-badge {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: rgba(5, 150, 105, 0.1);
+      color: var(--brand-emerald);
+      border: 1px solid rgba(5, 150, 105, 0.2);
+    }
+  </style>
+</head>
+<body style="background: var(--bg-app); min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+
+  <div style="position: absolute; top: 1rem; right: 1.5rem;">
+    <button class="theme-toggle-btn">🌙 Dark Mode</button>
+  </div>
+
+  <div class="auth-card">
+    <div style="text-align: center; margin-bottom: 1.25rem;">
+      <a href="index.html" class="brand-logo" style="justify-content: center; color: var(--primary-dark); font-size: 1.5rem; margin-bottom: 0.3rem;">
+        🏥 AarogyaX <span style="color: var(--brand-emerald);">Cure</span>
+      </a>
+      <p id="signupRoleSubtext" style="color: var(--text-muted); font-size: 0.85rem;">Create New Patient Health Profile</p>
+    </div>
+
+    <div style="display: flex; gap: 0.4rem; margin-bottom: 1.25rem;">
+      <button type="button" class="role-tab-btn active-role" data-signup-role="patient">👤 Patient</button>
+      <button type="button" class="role-tab-btn" data-signup-role="doctor">👨‍⚕️ Doctor</button>
+      <button type="button" class="role-tab-btn" data-signup-role="hospital">🏥 Hospital</button>
+    </div>
+
+    <div id="authAlert" style="display: none; padding: 0.65rem; border-radius: var(--radius-md); font-size: 0.85rem; margin-bottom: 1rem; text-align: center;"></div>
+
+    <form id="signupForm">
+      <div style="margin-bottom: 0.85rem;">
+        <label id="nameLabel" style="display: block; font-size: 0.825rem; font-weight: 500; color: var(--primary-dark); margin-bottom: 0.3rem;">Full Name</label>
+        <input type="text" id="name" placeholder="e.g. Animesh Karmakar" required style="width: 100%; padding: 0.65rem 0.85rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); background: var(--bg-app);">
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0.85rem;">
+        <div>
+          <label style="display: block; font-size: 0.825rem; font-weight: 500; color: var(--primary-dark); margin-bottom: 0.3rem;">Email Address</label>
+          <input type="email" id="email" placeholder="name@example.com" required style="width: 100%; padding: 0.65rem 0.85rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); background: var(--bg-app);">
+        </div>
+        <div>
+          <label style="display: block; font-size: 0.825rem; font-weight: 500; color: var(--primary-dark); margin-bottom: 0.3rem;">Phone Number</label>
+          <input type="tel" id="phone" placeholder="+91 9876543210" required style="width: 100%; padding: 0.65rem 0.85rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); background: var(--bg-app);">
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0.85rem;">
+        <div>
+          <label style="display: block; font-size: 0.825rem; font-weight: 500; color: var(--primary-dark); margin-bottom: 0.3rem;">Create Password</label>
+          <div class="input-group">
+            <input type="password" id="password" placeholder="At least 6 chars" required minlength="6" style="width: 100%; padding: 0.65rem 2rem 0.65rem 0.85rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); background: var(--bg-app);">
+            <span id="togglePasswordBtn" class="toggle-pwd">👁️</span>
+          </div>
+        </div>
+        <div>
+          <label style="display: block; font-size: 0.825rem; font-weight: 500; color: var(--primary-dark); margin-bottom: 0.3rem;">Confirm Password</label>
+          <input type="password" id="confirmPassword" placeholder="Re-enter password" required minlength="6" style="width: 100%; padding: 0.65rem 0.85rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); background: var(--bg-app);">
+        </div>
+      </div>
+
+      <!-- Patient Specific Fields -->
+      <div id="patientFieldsGroup">
+        <div style="margin-bottom: 0.85rem;">
+          <label style="display: block; font-size: 0.825rem; font-weight: 500; color: var(--primary-dark); margin-bottom: 0.3rem;">Blood Group</label>
+          <select id="bloodGroup" style="width: 100%; padding: 0.65rem 0.85rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); background: var(--bg-app);">
+            <option value="B+">B Positive (B+)</option>
+            <option value="O+">O Positive (O+)</option>
+            <option value="A+">A Positive (A+)</option>
+            <option value="AB+">AB Positive (AB+)</option>
+            <option value="O-">O Negative (O-)</option>
+            <option value="B-">B Negative (B-)</option>
+            <option value="A-">A Negative (A-)</option>
+            <option value="AB-">AB Negative (AB-)</option>
+          </select>
+        </div>
+
+        <div style="margin-bottom: 1.25rem; background: var(--bg-app); padding: 0.85rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <span style="font-size: 0.825rem; font-weight: 600; color: var(--sos-red);">🚨 Emergency Contacts (<span id="contactCountBadge">1</span>/5 Max)</span>
+            <button type="button" id="addContactRowBtn" class="btn btn-outline" style="padding: 0.2rem 0.6rem; font-size: 0.75rem;">+ Add Contact</button>
+          </div>
+          <div id="emergencyContactsListContainer">
+            <div class="contact-row">
+              <input type="text" class="contact-name" placeholder="Name (e.g. Mom)" style="padding: 0.5rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle); font-size: 0.85rem;">
+              <input type="tel" class="contact-phone" placeholder="Phone (+91 9876543210)" style="padding: 0.5rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle); font-size: 0.85rem;">
+              <button type="button" class="btn btn-outline remove-contact-btn" style="padding: 0.3rem 0.5rem; font-size: 0.75rem; color: var(--sos-red); display: none;">✕</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Doctor Secure Verification Fields -->
+      <div id="doctorFieldsGroup" style="display: none; background: rgba(5, 150, 105, 0.03); padding: 1rem; border-radius: var(--radius-md); border: 1px solid rgba(5, 150, 105, 0.2); margin-bottom: 1.25rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+          <span style="font-weight: 600; font-size: 0.875rem; color: var(--primary-dark);">👨‍⚕️ Clinical Practitioner Security Verification</span>
+          <span class="security-badge">🔒 Encrypted Credential</span>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0.85rem;">
+          <div>
+            <label style="display: block; font-size: 0.825rem; font-weight: 500; color: var(--primary-dark); margin-bottom: 0.3rem;">Medical Specialty</label>
+            <select id="specialtyInput" style="width: 100%; padding: 0.65rem 0.85rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); background: #ffffff;">
+              <option value="Cardiology">Cardiology</option>
+              <option value="Internal Medicine">Internal Medicine</option>
+              <option value="Neurology">Neurology</option>
+              <option value="Pediatrics">Pediatrics</option>
+              <option value="Trauma & Surgery">Trauma & Surgery</option>
+              <option value="General Practice">General Practice</option>
+            </select>
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.825rem; font-weight: 500; color: var(--primary-dark); margin-bottom: 0.3rem;">Medical Council License No. *</label>
+            <input type="text" id="licenseNoInput" placeholder="e.g. MCI-2026-98210" style="width: 100%; padding: 0.65rem 0.85rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); background: #ffffff;">
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+          <div>
+            <label style="display: block; font-size: 0.825rem; font-weight: 500; color: var(--primary-dark); margin-bottom: 0.3rem;">Doctor Verification Security PIN *</label>
+            <input type="password" id="docPinInput" placeholder="e.g. DOC-9941" style="width: 100%; padding: 0.65rem 0.85rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); background: #ffffff;">
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.825rem; font-weight: 500; color: var(--primary-dark); margin-bottom: 0.3rem;">Associated Hospital / Clinic</label>
+            <input type="text" id="doctorHospitalInput" placeholder="e.g. Apex Super Specialty Hospital" style="width: 100%; padding: 0.65rem 0.85rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); background: #ffffff;">
+          </div>
+        </div>
+      </div>
+
+      <!-- Hospital Secure Verification Fields -->
+      <div id="hospitalFieldsGroup" style="display: none; background: rgba(2, 132, 199, 0.03); padding: 1rem; border-radius: var(--radius-md); border: 1px solid rgba(2, 132, 199, 0.2); margin-bottom: 1.25rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+          <span style="font-weight: 600; font-size: 0.875rem; color: var(--primary-dark);">🏥 Hospital Registry & ER Desk Verification</span>
+          <span class="security-badge" style="background: rgba(2, 132, 199, 0.1); color: #0284c7; border-color: rgba(2, 132, 199, 0.2);">🔒 Admin Access Verified</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0.85rem;">
+          <div>
+            <label style="display: block; font-size: 0.825rem; font-weight: 500; color: var(--primary-dark); margin-bottom: 0.3rem;">Hospital Establishment License No. *</label>
+            <input type="text" id="hospitalRegNoInput" placeholder="e.g. HOSP-REG-2026-4412" style="width: 100%; padding: 0.65rem 0.85rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); background: #ffffff;">
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.825rem; font-weight: 500; color: var(--primary-dark); margin-bottom: 0.3rem;">Hospital Admin Access Passcode *</label>
+            <input type="password" id="hospPinInput" placeholder="e.g. HOSP-PIN-7720" style="width: 100%; padding: 0.65rem 0.85rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); background: #ffffff;">
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; margin-bottom: 0.85rem;">
+          <div>
+            <label style="display: block; font-size: 0.825rem; font-weight: 500; color: var(--primary-dark); margin-bottom: 0.3rem;">ER Beds</label>
+            <input type="number" id="erBedsInput" value="18" min="1" style="width: 100%; padding: 0.65rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); background: #ffffff;">
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.825rem; font-weight: 500; color: var(--primary-dark); margin-bottom: 0.3rem;">Total Beds</label>
+            <input type="number" id="totalBedsInput" value="150" min="1" style="width: 100%; padding: 0.65rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); background: #ffffff;">
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.825rem; font-weight: 500; color: var(--primary-dark); margin-bottom: 0.3rem;">Ambulances</label>
+            <input type="number" id="ambulancesInput" value="4" min="0" style="width: 100%; padding: 0.65rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); background: #ffffff;">
+          </div>
+        </div>
+
+        <div>
+          <label style="display: block; font-size: 0.825rem; font-weight: 500; color: var(--primary-dark); margin-bottom: 0.3rem;">Hospital Street Address & City</label>
+          <input type="text" id="hospitalAddressInput" placeholder="e.g. City Centre, Durgapur, West Bengal" style="width: 100%; padding: 0.65rem 0.85rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); background: #ffffff;">
+        </div>
+      </div>
+
+      <button type="submit" id="submitSignupBtn" class="btn btn-primary" style="width: 100%; padding: 0.75rem; font-size: 0.95rem; margin-bottom: 0.75rem;">
+        Register Patient Profile
+      </button>
+
+      <div style="text-align: center; font-size: 0.85rem; color: var(--text-muted);">
+        Already registered? <a href="login.html" style="font-weight: 500;">Sign in here</a>
+      </div>
+    </form>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

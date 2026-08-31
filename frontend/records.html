@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Health Records - AarogyaX Cure</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  
+  <nav class="navbar">
+    <a href="dashboard.html" class="brand-logo">
+      🏥 AarogyaX <span class="brand-accent">Cure</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="records.html" class="active">Health Records</a></li>
+      <li><a href="reminders.html">Reminders</a></li>
+      <li><a href="emergency.html" class="btn btn-sos">🚨 SOS</a></li>
+    </ul>
+  </nav>
+
+  <main class="dashboard-container">
+    <div class="dashboard-header">
+      <div>
+        <h1>📋 Digital Health Records</h1>
+        <p>Centralized repository for blood reports, prescriptions, and medical histories</p>
+      </div>
+      <button id="addRecordBtn" class="btn btn-primary">+ Add New Health Record</button>
+    </div>
+
+    <div id="addRecordCard" style="display: none; background: white; padding: 1.75rem; border-radius: var(--radius-lg); border: 1px solid var(--card-border); margin-bottom: 2rem; box-shadow: var(--shadow-md);">
+      <h3 style="margin-bottom: 1rem;">📄 Upload Medical Record</h3>
+      <form id="recordForm">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+          <div>
+            <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.3rem;">Document Title</label>
+            <input type="text" id="recTitle" required placeholder="e.g. Lipid Profile Test" style="width: 100%; padding: 0.7rem; border-radius: var(--radius-md); border: 1px solid #cbd5e1;">
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.3rem;">Category</label>
+            <select id="recCategory" style="width: 100%; padding: 0.7rem; border-radius: var(--radius-md); border: 1px solid #cbd5e1;">
+              <option value="Blood Test">Blood Test</option>
+              <option value="Prescription">Prescription</option>
+              <option value="Medical Report">Medical Report</option>
+              <option value="Vaccination">Vaccination</option>
+            </select>
+          </div>
+        </div>
+        <div style="margin-bottom: 1rem;">
+          <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.3rem;">Description / Findings</label>
+          <textarea id="recDesc" rows="3" placeholder="Key report findings..." style="width: 100%; padding: 0.7rem; border-radius: var(--radius-md); border: 1px solid #cbd5e1;"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Save Record</button>
+      </form>
+    </div>
+
+    <div id="recordsGrid" class="grid-container">
+
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 AarogyaX Cure. Encrypted Health Records.</p>
+  </footer>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/records.js"></script>
+</body>
+</html>

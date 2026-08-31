@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🚨 Emergency SOS - AarogyaX Cure</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .emergency-hero {
+      background: var(--sos-red-light);
+      border: 1px solid rgba(220, 38, 38, 0.2);
+      padding: 2.25rem 1.5rem;
+      border-radius: var(--radius-lg);
+      margin-bottom: 2rem;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="dashboard.html" class="brand-logo">
+      🏥 AarogyaX <span class="brand-accent">Cure</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="assistant.html">AI Assistant</a></li>
+      <li><a href="hospitals.html">Hospitals</a></li>
+      <li><a href="blood.html">Blood Donors</a></li>
+      <li><a href="records.html">Records</a></li>
+      <li><a href="reminders.html">Reminders</a></li>
+      <li><a href="profile.html">Health Card</a></li>
+      <li><a href="#" id="logoutBtn" class="btn btn-outline" style="padding: 0.35rem 0.8rem; font-size: 0.85rem;">Logout</a></li>
+      <li><a href="emergency.html" class="btn btn-sos active" style="padding: 0.35rem 0.8rem; font-size: 0.85rem;">🚨 SOS</a></li>
+    </ul>
+  </nav>
+
+  <main class="dashboard-container">
+    <div class="emergency-hero">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <span style="background: rgba(220, 38, 38, 0.1); color: var(--sos-red); padding: 0.25rem 0.75rem; border-radius: var(--radius-pill); font-size: 0.8rem; font-weight: 600;">🚨 EMERGENCY MODE</span>
+          <h1 style="color: var(--sos-red); font-size: 1.7rem; margin-top: 0.4rem; font-weight: 700;">Instant SOS Emergency Dispatch</h1>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Broadcasting GPS location and connecting nearest hospital ER services.</p>
+        </div>
+        <button id="triggerSosBtn" class="btn btn-sos" style="padding: 0.9rem 1.8rem; font-size: 1rem;">
+          🚨 PRESS FOR IMMEDIATE SOS
+        </button>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.25rem;">
+      <div class="feature-card">
+        <div class="card-icon" style="background: #fee2e2; color: var(--sos-red);">📍</div>
+        <h3 class="card-title">Live GPS Location</h3>
+        <p id="gpsStatusText" class="card-desc">Detecting high-precision coordinates...</p>
+        <div style="background: #fafafa; padding: 0.85rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); margin-bottom: 1rem;">
+          <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Coordinates</div>
+          <div id="gpsCoordsText" style="font-size: 1rem; font-weight: 600; color: var(--primary-dark);">23.5204° N, 87.3119° E</div>
+        </div>
+        <button id="shareLocationBtn" class="btn btn-primary" style="width: 100%;">
+          📲 Share Location via WhatsApp / SMS
+        </button>
+      </div>
+
+      <div class="feature-card">
+        <div class="card-icon">🏥</div>
+        <h3 class="card-title">Nearest Emergency Room</h3>
+        <p id="hospitalDistanceText" class="card-desc">Apex Super Specialty Hospital (1.2 km away)</p>
+        <div style="background: #fafafa; padding: 0.85rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); margin-bottom: 1rem;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 0.3rem;">
+            <span style="font-size: 0.85rem; color: var(--text-muted);">Available ER Beds:</span>
+            <span style="font-weight: 600; color: var(--brand-emerald);">18 Beds</span>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span style="font-size: 0.85rem; color: var(--text-muted);">Ambulance:</span>
+            <span style="font-weight: 600; color: var(--primary-dark);">On Standby</span>
+          </div>
+        </div>
+        <div style="display: flex; gap: 0.5rem;">
+          <a href="tel:+913432540001" class="btn btn-sos" style="flex: 1; text-align: center; font-size: 0.85rem;">📞 Call ER Desk</a>
+          <a id="getDirectionsBtn" href="https://www.google.com/maps?q=23.5204,87.3119" target="_blank" class="btn btn-outline" style="flex: 1; text-align: center; font-size: 0.85rem;">🗺️ Directions</a>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="card-icon">👥</div>
+        <h3 class="card-title">Emergency Contacts</h3>
+        <div id="emergencyContactsList" style="margin-bottom: 1rem;">
+          <!-- Dynamically populated -->
+        </div>
+        <button id="notifyContactsBtn" class="btn btn-outline" style="width: 100%;">
+          🔔 Send SMS Alert to Contacts
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 AarogyaX Cure. Emergency Network.</p>
+  </footer>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/emergency.js"></script>
+</body>
+</html>

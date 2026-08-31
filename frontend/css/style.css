@@ -1,0 +1,262 @@
+/* ==========================================================================
+   AAROGYAX CURE - ELEGANT LIGHT & DARK MODE DESIGN SYSTEM
+   ========================================================================== */
+
+:root {
+  /* Light Mode Palette (Default) */
+  --primary-dark: #0f172a;
+  --text-main: #334155;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  
+  --brand-emerald: #059669;
+  --brand-emerald-dark: #047857;
+  --brand-emerald-light: #ecfdf5;
+  
+  --sos-red: #dc2626;
+  --sos-red-light: #fef2f2;
+  
+  --bg-app: #f8fafc;
+  --card-bg: #ffffff;
+  --border-subtle: #e2e8f0;
+  --border-focus: #cbd5e1;
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-card: 0 4px 20px -2px rgba(15, 23, 42, 0.04);
+  --shadow-card-hover: 0 10px 25px -4px rgba(15, 23, 42, 0.08);
+  
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-pill: 9999px;
+  
+  --transition-smooth: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Dark Mode Theme Tokens */
+body.dark-theme {
+  --primary-dark: #f8fafc;
+  --text-main: #cbd5e1;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  
+  --brand-emerald-light: rgba(5, 150, 105, 0.15);
+  --sos-red-light: rgba(220, 38, 38, 0.15);
+  
+  --bg-app: #090d16;
+  --card-bg: #111827;
+  --border-subtle: #1f2937;
+  --border-focus: #374151;
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+  --shadow-card: 0 4px 20px -2px rgba(0, 0, 0, 0.3);
+  --shadow-card-hover: 0 10px 25px -4px rgba(0, 0, 0, 0.5);
+}
+
+/* Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Minimalist Typography */
+h1, h2, h3, h4 {
+  color: var(--primary-dark);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+a {
+  color: var(--brand-emerald);
+  text-decoration: none;
+  transition: color var(--transition-smooth);
+}
+
+a:hover {
+  color: var(--brand-emerald-dark);
+}
+
+/* Minimal Navbar */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 0.85rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  letter-spacing: -0.03em;
+}
+
+.brand-logo span.brand-accent {
+  color: var(--brand-emerald);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--text-muted);
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.nav-links a:hover, .nav-links a.active {
+  color: var(--primary-dark);
+}
+
+/* Clean Minimal Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1.1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-smooth);
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: var(--primary-dark);
+  color: var(--bg-app);
+  border-color: var(--primary-dark);
+}
+
+body.dark-theme .btn-primary {
+  background: #059669;
+  color: #ffffff;
+  border-color: #059669;
+}
+
+.btn-primary:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+.btn-sos {
+  background: var(--sos-red);
+  color: #ffffff;
+  font-weight: 600;
+  border-color: var(--sos-red);
+}
+
+.btn-sos:hover {
+  background: #b91c1c;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  background: transparent;
+  border-color: var(--border-subtle);
+  color: var(--primary-dark);
+}
+
+.btn-outline:hover {
+  background: var(--bg-app);
+  border-color: var(--border-focus);
+  color: var(--primary-dark);
+}
+
+/* Theme Toggle Button Styling */
+.theme-toggle-btn {
+  background: var(--bg-app);
+  border: 1px solid var(--border-subtle);
+  color: var(--primary-dark);
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all var(--transition-smooth);
+}
+
+.theme-toggle-btn:hover {
+  border-color: var(--border-focus);
+  transform: scale(1.05);
+}
+
+/* Minimal Status Badges */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.status-badge.live {
+  background: var(--brand-emerald-light);
+  color: var(--brand-emerald);
+  border: 1px solid rgba(5, 150, 105, 0.3);
+}
+
+.status-badge.demo {
+  background: rgba(217, 119, 6, 0.15);
+  color: #f59e0b;
+  border: 1px solid rgba(217, 119, 6, 0.3);
+}
+
+.pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: currentColor;
+}
+
+/* Clean Footer */
+footer {
+  margin-top: auto;
+  background: var(--card-bg);
+  color: var(--text-muted);
+  padding: 1.5rem;
+  text-align: center;
+  font-size: 0.85rem;
+  border-top: 1px solid var(--border-subtle);
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}

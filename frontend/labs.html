@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diagnostic Labs Near Me - AarogyaX Cure</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="js/theme.js"></script>
+  <style>
+    #mapContainer {
+      height: 380px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-sm);
+      z-index: 1;
+    }
+    .distance-pills {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+    .distance-pill {
+      background: var(--card-bg);
+      color: var(--text-muted);
+      border: 1px solid var(--border-subtle);
+      padding: 0.4rem 0.85rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.825rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--transition-smooth);
+    }
+    .distance-pill.active-pill {
+      background: var(--primary-dark);
+      color: var(--bg-app);
+      border-color: var(--primary-dark);
+    }
+    .test-tag {
+      background: var(--bg-app);
+      color: var(--primary-dark);
+      border: 1px solid var(--border-subtle);
+      padding: 0.2rem 0.5rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.75rem;
+      display: inline-block;
+      margin: 0.2rem 0.2rem 0.2rem 0;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="dashboard.html" class="brand-logo">
+      🏥 AarogyaX <span class="brand-accent">Cure</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="assistant.html">AI Assistant</a></li>
+      <li><a href="hospitals.html">Hospitals</a></li>
+      <li><a href="labs.html" class="active">Diagnostic Labs</a></li>
+      <li><a href="blood.html">Blood Donors</a></li>
+      <li><a href="records.html">Records</a></li>
+      <li><a href="profile.html">Health Card</a></li>
+      <li><button class="theme-toggle-btn">🌙 Dark Mode</button></li>
+      <li><a href="#" id="logoutBtn" class="btn btn-outline" style="padding: 0.35rem 0.8rem; font-size: 0.85rem;">Logout</a></li>
+      <li><a href="emergency.html" class="btn btn-sos" style="padding: 0.35rem 0.8rem; font-size: 0.85rem;">🚨 SOS</a></li>
+    </ul>
+  </nav>
+
+  <main class="dashboard-container">
+    <div class="dashboard-header">
+      <div>
+        <h1>🧪 Realtime Diagnostic Labs & Pathology Centers</h1>
+        <p id="labStatusText">Detecting nearby medical laboratories using Geoapify Places API...</p>
+      </div>
+      <div style="display: flex; gap: 0.5rem; align-items: center;">
+        <button id="detectLocationBtn" class="btn btn-outline" style="font-size: 0.85rem; padding: 0.4rem 0.8rem;">
+          📍 Update GPS Proximity
+        </button>
+        <span class="status-badge live">
+          <span class="pulse-dot"></span> Geoapify Labs API Active
+        </span>
+      </div>
+    </div>
+
+    <div class="distance-pills">
+      <span class="distance-pill" data-distance="3">Within 3 km</span>
+      <span class="distance-pill active-pill" data-distance="5">Within 5 km</span>
+      <span class="distance-pill" data-distance="10">Within 10 km</span>
+      <span class="distance-pill" data-distance="50">All Nearby Labs</span>
+    </div>
+
+    <div id="mapContainer"></div>
+
+    <div id="labGrid" class="grid-container">
+      <div style="font-size: 0.9rem; color: var(--text-muted); grid-column: 1 / -1; text-align: center; padding: 2rem;">
+        Loading live nearby diagnostic laboratories...
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 AarogyaX Cure. Realtime Diagnostic Laboratory Network.</p>
+  </footer>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/labs.js"></script>
+</body>
+</html>

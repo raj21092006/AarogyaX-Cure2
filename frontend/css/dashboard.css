@@ -1,0 +1,158 @@
+/* ==========================================================================
+   MINIMALIST DASHBOARD & CARDS STYLESHEET (LIGHT / DARK SUPPORT)
+   ========================================================================== */
+
+.dashboard-container {
+  max-width: 1140px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+  width: 100%;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.user-welcome h1 {
+  font-size: 1.6rem;
+  color: var(--primary-dark);
+  font-weight: 600;
+}
+
+.user-welcome p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* Minimal Grid Matrix */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+
+.feature-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-card);
+  transition: all var(--transition-smooth);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.feature-card:hover {
+  border-color: var(--border-focus);
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
+}
+
+.feature-card.sos-card {
+  background: var(--sos-red-light);
+  border-color: rgba(220, 38, 38, 0.3);
+}
+
+.feature-card.sos-card:hover {
+  border-color: var(--sos-red);
+}
+
+.card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: var(--bg-app);
+  color: var(--primary-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.sos-card .card-icon {
+  background: rgba(220, 38, 38, 0.2);
+  color: var(--sos-red);
+}
+
+.card-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  color: var(--primary-dark);
+}
+
+.card-desc {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 1.25rem;
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+.card-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+/* Minimalist Health Summary Bar */
+.health-bar {
+  background: var(--card-bg);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.5rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 2rem;
+  border: 1px solid var(--border-subtle);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.health-stat-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.stat-icon {
+  font-size: 1.4rem;
+}
+
+.stat-info label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  display: block;
+}
+
+.stat-info value {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--primary-dark);
+}
+
+/* Input Fields in Dark Theme */
+body.dark-theme input[type="text"],
+body.dark-theme input[type="email"],
+body.dark-theme input[type="password"],
+body.dark-theme input[type="tel"],
+body.dark-theme input[type="time"],
+body.dark-theme textarea,
+body.dark-theme select {
+  background: #1f2937 !important;
+  color: #f8fafc !important;
+  border-color: #374151 !important;
+}

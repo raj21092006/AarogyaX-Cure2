@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - AarogyaX Cure</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <script src="js/theme.js"></script>
+  <style>
+    .auth-card {
+      width: 100%;
+      max-width: 460px;
+      padding: 2.25rem;
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-card);
+      border: 1px solid var(--border-subtle);
+      margin: 2rem 1rem;
+    }
+    .role-tab-btn {
+      flex: 1;
+      padding: 0.6rem 0.4rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-app);
+      color: var(--text-muted);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all var(--transition-smooth);
+      text-align: center;
+    }
+    .role-tab-btn.active-role {
+      background: var(--primary-dark);
+      color: var(--bg-app);
+      border-color: var(--primary-dark);
+      font-weight: 600;
+    }
+    .input-group {
+      position: relative;
+      margin-bottom: 1.25rem;
+    }
+    .toggle-pwd {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      font-size: 1rem;
+      user-select: none;
+      opacity: 0.5;
+    }
+    .divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      margin: 1.25rem 0;
+      color: var(--text-light);
+      font-size: 0.8rem;
+    }
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .divider span {
+      padding: 0 0.5rem;
+    }
+  </style>
+</head>
+<body style="background: var(--bg-app); min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+
+  <div style="position: absolute; top: 1rem; right: 1.5rem;">
+    <button class="theme-toggle-btn">🌙 Dark Mode</button>
+  </div>
+
+  <div class="auth-card">
+    <div style="text-align: center; margin-bottom: 1.25rem;">
+      <a href="index.html" class="brand-logo" style="justify-content: center; color: var(--primary-dark); font-size: 1.5rem; margin-bottom: 0.3rem;">
+        <img src="favicon.png" alt="AarogyaX Logo" style="height: 32px; width: 32px; vertical-align: middle; margin-right: 6px;"> AarogyaX <span style="color: var(--brand-emerald);">Cure</span>
+      </a>
+      <p id="roleSubtext" style="color: var(--text-muted); font-size: 0.85rem;">Patient & Personal Healthcare Portal</p>
+    </div>
+
+    <div style="display: flex; gap: 0.4rem; margin-bottom: 1.25rem;">
+      <button type="button" class="role-tab-btn active-role" data-role="patient">👤 Patient</button>
+      <button type="button" class="role-tab-btn" data-role="doctor">👨‍⚕️ Doctor</button>
+      <button type="button" class="role-tab-btn" data-role="hospital">🏥 Hospital</button>
+    </div>
+
+    <div id="authAlert" style="display: none; padding: 0.65rem; border-radius: var(--radius-md); font-size: 0.85rem; margin-bottom: 1rem; text-align: center;"></div>
+
+    <form id="loginForm" autocomplete="on">
+      <div style="margin-bottom: 1rem;">
+        <label id="emailLabel" style="display: block; font-size: 0.825rem; font-weight: 500; color: var(--primary-dark); margin-bottom: 0.35rem;">Patient Email</label>
+        <input type="email" id="email" placeholder="name@example.com" required style="width: 100%; padding: 0.65rem 0.85rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); font-size: 0.9rem;">
+      </div>
+
+      <div style="margin-bottom: 0.85rem;">
+        <label style="display: block; font-size: 0.825rem; font-weight: 500; color: var(--primary-dark); margin-bottom: 0.35rem;">Password</label>
+        <div class="input-group">
+          <input type="password" id="password" placeholder="Enter your password" required style="width: 100%; padding: 0.65rem 2.25rem 0.65rem 0.85rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); font-size: 0.9rem;">
+          <span id="togglePasswordBtn" class="toggle-pwd">👁️</span>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; font-size: 0.825rem;">
+        <label style="display: flex; align-items: center; gap: 0.35rem; cursor: pointer; color: var(--text-muted);">
+          <input type="checkbox" id="rememberMe" checked> Remember session
+        </label>
+        <a href="#" id="forgotPasswordToggle" style="color: var(--brand-emerald); font-weight: 500;">Forgot password?</a>
+      </div>
+
+      <button type="submit" id="submitLoginBtn" class="btn btn-primary" style="width: 100%; padding: 0.75rem; font-size: 0.95rem; margin-bottom: 0.5rem;">
+        Sign In as Patient
+      </button>
+    </form>
+
+    <div id="forgotPasswordCard" style="display: none; margin-top: 1rem; padding: 1.15rem; background: var(--bg-app); border: 1px solid var(--border-subtle); border-radius: var(--radius-md);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+        <span style="font-size: 0.9rem; font-weight: 600; color: var(--primary-dark);">🔑 Reset Your Password</span>
+        <button type="button" id="closeForgotCardBtn" style="background: none; border: none; font-size: 1rem; cursor: pointer; color: var(--text-muted);">✕</button>
+      </div>
+      <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.85rem;">Enter your registered account email address to receive a secure Firebase Auth password reset link.</p>
+      
+      <form id="forgotPasswordForm">
+        <input type="email" id="resetEmailInput" placeholder="name@example.com" required style="width: 100%; padding: 0.6rem 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle); font-size: 0.85rem; margin-bottom: 0.75rem;">
+        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.6rem; font-size: 0.85rem; background: var(--brand-emerald); border-color: var(--brand-emerald);">
+          📧 Send Password Reset Email
+        </button>
+      </form>
+    </div>
+
+    <div id="socialAuthGroup" style="display: flex; gap: 0.5rem; margin-top: 0.75rem;">
+      <button id="googleSignInBtn" class="btn btn-outline" style="flex: 1; padding: 0.65rem; font-size: 0.85rem;">
+        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="16" style="vertical-align: middle; margin-right: 4px;"> Google
+      </button>
+      <button id="phoneSignInBtn" class="btn btn-outline" style="flex: 1; padding: 0.65rem; font-size: 0.85rem;">
+        📱 Phone SMS
+      </button>
+    </div>
+
+    <div id="phoneAuthCard" style="display: none; margin-top: 1rem; padding: 1rem; background: var(--bg-app); border: 1px solid var(--border-subtle); border-radius: var(--radius-md);">
+      <div style="font-size: 0.85rem; font-weight: 600; color: #0284c7; margin-bottom: 0.5rem;">SMS Phone Verification</div>
+      <input type="tel" id="phoneNumberInput" placeholder="+91 9876543210" style="width: 100%; padding: 0.55rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle); margin-bottom: 0.5rem;">
+      <div id="recaptchaContainer"></div>
+      <button id="sendOtpBtn" class="btn btn-outline" style="width: 100%; padding: 0.55rem; font-size: 0.85rem; margin-bottom: 0.5rem;">Send OTP SMS</button>
+      
+      <div id="verificationCodeGroup" style="display: none; margin-top: 0.5rem;">
+        <input type="text" id="verificationCodeInput" placeholder="Enter 6-digit OTP" style="width: 100%; padding: 0.55rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle); margin-bottom: 0.5rem;">
+        <button id="verifyOtpBtn" class="btn btn-primary" style="width: 100%; padding: 0.55rem; font-size: 0.85rem;">Verify OTP & Sign In</button>
+      </div>
+    </div>
+
+    <div class="divider"><span>EMERGENCY ACCESS</span></div>
+
+    <a href="emergency.html" class="btn btn-sos" style="width: 100%; padding: 0.65rem; font-size: 0.9rem; text-align: center;">
+      🚨 Emergency Direct Access
+    </a>
+
+    <div style="text-align: center; font-size: 0.85rem; color: var(--text-muted); margin-top: 1.25rem;">
+      New to AarogyaX? <a href="signup.html" style="font-weight: 500;">Register profile</a>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

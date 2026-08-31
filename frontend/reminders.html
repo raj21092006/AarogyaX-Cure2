@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medicine Reminders - AarogyaX Cure</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="dashboard.html" class="brand-logo">
+      🏥 AarogyaX <span class="brand-accent">Cure</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="records.html">Health Records</a></li>
+      <li><a href="reminders.html" class="active">Reminders</a></li>
+      <li><a href="emergency.html" class="btn btn-sos">🚨 SOS</a></li>
+    </ul>
+  </nav>
+
+  <main class="dashboard-container">
+    <div class="dashboard-header">
+      <div>
+        <h1>💊 Medicine Schedule & Dosage Reminders</h1>
+        <p>Automated medication tracking with Web Notification support</p>
+      </div>
+      <button id="addMedBtn" class="btn btn-primary">+ Add New Reminder</button>
+    </div>
+
+    <div id="addMedCard" style="display: none; background: white; padding: 1.75rem; border-radius: var(--radius-lg); border: 1px solid var(--card-border); margin-bottom: 2rem; box-shadow: var(--shadow-md);">
+      <h3 style="margin-bottom: 1rem;">💊 Add Medication Dosage</h3>
+      <form id="medForm">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+          <div>
+            <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.3rem;">Medicine Name</label>
+            <input type="text" id="medName" required placeholder="e.g. Paracetamol" style="width: 100%; padding: 0.7rem; border-radius: var(--radius-md); border: 1px solid #cbd5e1;">
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.3rem;">Dosage</label>
+            <input type="text" id="medDosage" required placeholder="e.g. 500mg" style="width: 100%; padding: 0.7rem; border-radius: var(--radius-md); border: 1px solid #cbd5e1;">
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+          <div>
+            <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.3rem;">Time</label>
+            <input type="time" id="medTime" required style="width: 100%; padding: 0.7rem; border-radius: var(--radius-md); border: 1px solid #cbd5e1;">
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.3rem;">Frequency</label>
+            <select id="medFreq" style="width: 100%; padding: 0.7rem; border-radius: var(--radius-md); border: 1px solid #cbd5e1;">
+              <option value="Daily">Daily</option>
+              <option value="Twice Daily">Twice Daily</option>
+              <option value="Weekly">Weekly</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Save Medication Reminder</button>
+      </form>
+    </div>
+
+    <div id="remindersGrid" class="grid-container">
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 AarogyaX Cure. Medication Tracker.</p>
+  </footer>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/reminders.js"></script>
+</body>
+</html>

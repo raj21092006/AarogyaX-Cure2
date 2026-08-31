@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AarogyaX Cure - Emergency Response & Healthcare Ecosystem</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <script src="js/theme.js"></script>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="index.html" class="brand-logo">
+      <img src="favicon.png" alt="AarogyaX Logo" style="height: 28px; width: 28px; vertical-align: middle; margin-right: 4px;"> AarogyaX <span class="brand-accent">Cure</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="hospitals.html">Hospitals</a></li>
+      <li><a href="labs.html">Diagnostic Labs</a></li>
+      <li><a href="blood.html">Blood Donors</a></li>
+      <li><button class="theme-toggle-btn">🌙 Dark Mode</button></li>
+      <li><a href="login.html" class="btn btn-outline" style="padding: 0.35rem 0.8rem; font-size: 0.85rem;">Login</a></li>
+      <li><a href="emergency.html" class="btn btn-sos" style="padding: 0.35rem 0.8rem; font-size: 0.85rem;">🚨 SOS Emergency</a></li>
+    </ul>
+  </nav>
+
+  <main class="dashboard-container">
+    <div style="text-align: center; max-width: 800px; margin: 3rem auto 2.5rem auto;">
+      <span class="status-badge live" style="margin-bottom: 1rem;">
+        <span class="pulse-dot"></span> Next-Gen Emergency Medical Response Platform
+      </span>
+      <h1 style="font-size: 2.5rem; font-weight: 700; margin-top: 0.5rem; margin-bottom: 1rem; color: var(--primary-dark); line-height: 1.2;">
+        Instant Medical Assistance & Realtime Resource Dispatch
+      </h1>
+      <p style="font-size: 1.1rem; color: var(--text-muted); margin-bottom: 2rem;">
+        Connect with emergency hospitals, diagnostic pathology labs, verified blood donors, and Gemini 3.7 Flash AI health guidance in seconds.
+      </p>
+      
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="login.html" class="btn btn-primary" style="padding: 0.85rem 1.8rem; font-size: 1rem;">
+          Enter Healthcare Portal
+        </a>
+        <a href="emergency.html" class="btn btn-sos" style="padding: 0.85rem 1.8rem; font-size: 1rem;">
+          🚨 Trigger Emergency SOS
+        </a>
+      </div>
+    </div>
+
+    <div class="grid-container" style="margin-top: 3rem;">
+      <div class="feature-card sos-card">
+        <div class="card-icon">🚨</div>
+        <h3 class="card-title">GPS Emergency Dispatch</h3>
+        <p class="card-desc">Broadcasts exact location coordinates to up to 5 emergency contacts & nearby emergency rooms.</p>
+        <a href="emergency.html" class="btn btn-sos">Open Emergency SOS</a>
+      </div>
+
+      <div class="feature-card">
+        <div class="card-icon">🏥</div>
+        <h3 class="card-title">Hospitals & ER Beds</h3>
+        <p class="card-desc">Locate real-time nearby hospitals using Geoapify Places API with live ER bed tracking.</p>
+        <a href="hospitals.html" class="btn btn-outline">Find Hospitals</a>
+      </div>
+
+      <div class="feature-card">
+        <div class="card-icon">🧪</div>
+        <h3 class="card-title">Diagnostic Laboratories</h3>
+        <p class="card-desc">Find nearby pathology testing centers, CBC blood test labs, and home sample collection.</p>
+        <a href="labs.html" class="btn btn-outline">Find Diagnostic Labs</a>
+      </div>
+
+      <div class="feature-card">
+        <div class="card-icon">🩸</div>
+        <h3 class="card-title">Realtime Blood Network</h3>
+        <p class="card-desc">Direct call and WhatsApp chat with verified local blood donors grouped by GPS proximity.</p>
+        <a href="blood.html" class="btn btn-outline">Blood Network</a>
+      </div>
+
+      <div class="feature-card">
+        <div class="card-icon">🤖</div>
+        <h3 class="card-title">Gemini 3.7 AI Assistant</h3>
+        <p class="card-desc">Ask health questions and receive structured first-aid guidance with medical guardrails.</p>
+        <a href="assistant.html" class="btn btn-outline">Ask AI Assistant</a>
+      </div>
+
+      <div class="feature-card">
+        <div class="card-icon">💳</div>
+        <h3 class="card-title">Digital Health Card</h3>
+        <p class="card-desc">Scannable QR Code ID containing blood group, emergency allergies, and contacts.</p>
+        <a href="profile.html" class="btn btn-outline">Digital Health ID</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+</body>
+</html>
