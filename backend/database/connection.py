@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 
 from dotenv import load_dotenv
 from sqlalchemy import create_engine
@@ -6,6 +7,11 @@ from sqlalchemy.engine import URL
 from sqlalchemy.orm import declarative_base, sessionmaker
 
 load_dotenv()
+
+
+# ------------------------------------------------------------
+# DATABASE CONFIGURATION
+# ------------------------------------------------------------
 
 DB_USER = os.getenv("DB_USER", "root")
 DB_PASSWORD = os.getenv("DB_PASSWORD", "")
@@ -15,13 +21,12 @@ DB_NAME = os.getenv("DB_NAME", "aarogyax_cure")
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 
-if not DATABASE_URL:
-    DB_USER = os.getenv("DB_USER", "root")
-    DB_PASSWORD = os.getenv("DB_PASSWORD", "")
-    DB_HOST = os.getenv("DB_HOST", "localhost")
-    DB_PORT = os.getenv("DB_PORT", "3306")
-    DB_NAME = os.getenv("DB_NAME", "aarogyax_cure")
 
+# ------------------------------------------------------------
+# BUILD DATABASE URL
+# ------------------------------------------------------------
+
+if not DATABASE_URL:
     DATABASE_URL = URL.create(
         drivername="mysql+pymysql",
         username=DB_USER,
@@ -31,31 +36,49 @@ if not DATABASE_URL:
         database=DB_NAME,
     )
 
-try:
-    if "sqlite" in str(DATABASE_URL):
-        engine = create_engine(
-            str(DATABASE_URL),
-            connect_args={"check_same_thread": False},
-            echo=False
-        )
-    else:
-        engine = create_engine(
-            DATABASE_URL,
-            pool_pre_ping=True,
-            pool_recycle=280,
-            echo=False
-        )
-        # Test connection
-        with engine.connect() as conn:
-            pass
-except Exception:
-    # Fallback to local SQLite database if MySQL server is not running locally
-    db_path = os.path.join(os.path.dirname(__file__), "aarogyax_cure.db")
+
+# ------------------------------------------------------------
+# TI DB CLOUD TLS CERTIFICATE
+# ------------------------------------------------------------
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+CA_CERT_PATH = BASE_DIR / "isrgrootx1.pem"
+
+
+# ------------------------------------------------------------
+# DATABASE ENGINE
+# ------------------------------------------------------------
+
+if "sqlite" in str(DATABASE_URL):
+
     engine = create_engine(
-        f"sqlite:///{db_path}",
-        connect_args={"check_same_thread": False},
+        str(DATABASE_URL),
+        connect_args={
+            "check_same_thread": False
+        },
         echo=False
     )
+
+else:
+
+    connect_args = {
+        "ssl": {
+            "ca": str(CA_CERT_PATH)
+        }
+    }
+
+    engine = create_engine(
+        DATABASE_URL,
+        connect_args=connect_args,
+        pool_pre_ping=True,
+        pool_recycle=280,
+        echo=False
+    )
+
+
+# ------------------------------------------------------------
+# SESSION
+# ------------------------------------------------------------
 
 SessionLocal = sessionmaker(
     autocommit=False,
@@ -63,16 +86,31 @@ SessionLocal = sessionmaker(
     bind=engine
 )
 
+
+# ------------------------------------------------------------
+# BASE MODEL
+# ------------------------------------------------------------
+
 Base = declarative_base()
 
 
+# ------------------------------------------------------------
+# DATABASE DEPENDENCY
+# ------------------------------------------------------------
+
 def get_db():
     db = SessionLocal()
+
     try:
         yield db
+
     finally:
         db.close()
 
+
+# ------------------------------------------------------------
+# INITIALIZE DATABASE
+# ------------------------------------------------------------
 
 def init_db():
     Base.metadata.create_all(bind=engine)
