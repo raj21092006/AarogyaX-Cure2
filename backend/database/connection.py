@@ -1,5 +1,4 @@
 import os
-from pathlib import Path
 
 from dotenv import load_dotenv
 from sqlalchemy import create_engine
@@ -8,23 +7,14 @@ from sqlalchemy.orm import declarative_base, sessionmaker
 
 load_dotenv()
 
-
-# ------------------------------------------------------------
-# DATABASE CONFIGURATION
-# ------------------------------------------------------------
-
 DB_USER = os.getenv("DB_USER", "root")
 DB_PASSWORD = os.getenv("DB_PASSWORD", "")
 DB_HOST = os.getenv("DB_HOST", "localhost")
 DB_PORT = os.getenv("DB_PORT", "3306")
 DB_NAME = os.getenv("DB_NAME", "aarogyax_cure")
+DB_CA = os.getenv("DB_CA", "")
 
 DATABASE_URL = os.getenv("DATABASE_URL")
-
-
-# ------------------------------------------------------------
-# BUILD DATABASE URL
-# ------------------------------------------------------------
 
 if not DATABASE_URL:
     DATABASE_URL = URL.create(
@@ -36,42 +26,58 @@ if not DATABASE_URL:
         database=DB_NAME,
     )
 
-
-# ------------------------------------------------------------
-# TI DB CLOUD TLS CERTIFICATE
-# ------------------------------------------------------------
-
-BASE_DIR = Path(__file__).resolve().parent.parent
-CA_CERT_PATH = BASE_DIR / "isrgrootx1.pem"
-
-
 # ------------------------------------------------------------
 # DATABASE ENGINE
 # ------------------------------------------------------------
 
-if "sqlite" in str(DATABASE_URL):
+try:
+    if "sqlite" in str(DATABASE_URL):
 
-    engine = create_engine(
-        str(DATABASE_URL),
-        connect_args={
-            "check_same_thread": False
-        },
-        echo=False
+        engine = create_engine(
+            str(DATABASE_URL),
+            connect_args={"check_same_thread": False},
+            echo=False
+        )
+
+    else:
+
+        # Find CA certificate
+        ca_path = DB_CA
+
+        if ca_path and not os.path.isabs(ca_path):
+            project_root = os.path.dirname(os.path.dirname(__file__))
+            ca_path = os.path.join(project_root, ca_path)
+
+        engine = create_engine(
+            DATABASE_URL,
+            connect_args={
+                "ssl_ca": ca_path,
+                "ssl_verify_cert": True,
+                "ssl_verify_identity": True,
+            },
+            pool_pre_ping=True,
+            pool_recycle=280,
+            echo=False,
+        )
+
+        # Test connection
+        with engine.connect() as conn:
+            pass
+
+except Exception as e:
+
+    print("Database connection failed:")
+    print(e)
+
+    # Fallback to local SQLite
+    db_path = os.path.join(
+        os.path.dirname(__file__),
+        "aarogyax_cure.db"
     )
 
-else:
-
-    connect_args = {
-        "ssl": {
-            "ca": str(CA_CERT_PATH)
-        }
-    }
-
     engine = create_engine(
-        DATABASE_URL,
-        connect_args=connect_args,
-        pool_pre_ping=True,
-        pool_recycle=280,
+        f"sqlite:///{db_path}",
+        connect_args={"check_same_thread": False},
         echo=False
     )
 
