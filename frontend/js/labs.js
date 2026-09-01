@@ -131,7 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (labStatusText) labStatusText.textContent = `Fetching diagnostic laboratories near ${lat.toFixed(4)}, ${lng.toFixed(4)}...`;
 
     // Step 1: Query local Flask Backend API
-    fetch(`http://localhost:5000/api/labs/nearby?lat=${lat}&lng=${lng}`)
+    fetch(`https://aarogyax-cure2.onrender.com/api/labs/nearby?lat=${lat}&lng=${lng}`)
       .then(res => res.json())
       .then(data => {
         if (data.status === "success" && data.labs && data.labs.length > 0) {

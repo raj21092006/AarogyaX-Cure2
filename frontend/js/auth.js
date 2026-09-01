@@ -319,7 +319,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // 3. Register in Backend API Database (Backend receives raw password to generate salted password_hash)
-    fetch("http://localhost:5000/api/auth/register", {
+    fetch("https://aarogyax-cure2.onrender.com/api/auth/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newUser)
@@ -381,7 +381,7 @@ document.addEventListener("DOMContentLoaded", () => {
       showAlert(`Verifying ${currentSelectedRole.toUpperCase()} credentials in database...`, true);
 
       // Attempt Flask Backend API
-      fetch("http://localhost:5000/api/auth/login", {
+      fetch("https://aarogyax-cure2.onrender.com/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password, role: currentSelectedRole })

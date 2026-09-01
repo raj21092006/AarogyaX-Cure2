@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
     chatMessages.appendChild(loadingBubble);
     chatMessages.scrollTop = chatMessages.scrollHeight;
 
-    fetch("http://localhost:5000/api/assistant/chat", {
+    fetch("https://aarogyax-cure2.onrender.com/api/assistant/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message: queryText })

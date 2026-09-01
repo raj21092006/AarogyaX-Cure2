@@ -251,7 +251,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Check API health status
-  fetch("http://localhost:5000/api/health")
+  fetch("https://aarogyax-cure2.onrender.com/api/health")
     .then(res => res.json())
     .then(data => {
       if (systemStatusBadge && statusModeText && data.status === "healthy") {

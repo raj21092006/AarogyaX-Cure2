@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function loadRealtimeDonors(bloodGroup = "", city = "") {
     if (liveDonorStatusText) liveDonorStatusText.textContent = "Fetching live real-time blood donor network...";
 
-    const url = `http://localhost:5000/api/blood/donors?bloodGroup=${encodeURIComponent(bloodGroup)}&city=${encodeURIComponent(city)}&lat=${currentLat}&lng=${currentLng}`;
+    const url = `https://aarogyax-cure2.onrender.com/api/blood/donors?bloodGroup=${encodeURIComponent(bloodGroup)}&city=${encodeURIComponent(city)}&lat=${currentLat}&lng=${currentLng}`;
 
     fetch(url)
       .then(res => res.json())
@@ -243,7 +243,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       // Write to Backend API
-      fetch("http://localhost:5000/api/blood/register-donor", {
+      fetch("https://aarogyax-cure2.onrender.com/api/blood/register-donor", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
@@ -285,7 +285,7 @@ document.addEventListener("DOMContentLoaded", () => {
         rtdb.ref("blood_requests").push(reqPayload);
       }
 
-      fetch("http://localhost:5000/api/blood/request", {
+      fetch("https://aarogyax-cure2.onrender.com/api/blood/request", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(reqPayload)

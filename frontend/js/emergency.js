@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
         rtdb.ref("emergency_alerts").push(sosData).catch(() => {});
       }
 
-      fetch("http://localhost:5000/api/emergency/sos", {
+      fetch("https://aarogyax-cure2.onrender.com/api/emergency/sos", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(sosData)
